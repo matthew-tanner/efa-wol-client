@@ -4,11 +4,9 @@ import Sitebar from "./home/Sitebar";
 import Auth from "./auth/Auth";
 import WorkoutIndex from "./workouts/WorkoutIndex";
 
-const log = (...args) => console.log(...args);
+//const log = (...args) => console.log(...args);
 
 class App extends Component {
-  //const [sessionToken, setSessionToken] = useState("");
-
   constructor() {
     super();
     this.setToken = (token) => {
@@ -31,12 +29,12 @@ class App extends Component {
           </Route>
         </Switch>
       );
-    }else {
-      return(
+    } else {
+      return (
         <Route path="/auth">
           <Auth />
         </Route>
-      )
+      );
     }
   };
 
@@ -52,34 +50,6 @@ class App extends Component {
       </Router>
     );
   }
-  // useEffect(() => {
-  //   if(localStorage.getItem("token")){
-  //     setSessionToken(localStorage.getItem("token"))
-  //   }
-  // }, [])
-
-  // const updateToken = (newToken) => {
-  //   localStorage.setItem("token", newToken);
-  //   setSessionToken(newToken);
-  //   log("Info - new token", ":", updateToken.name, newToken );
-  // }
-
-  // const clearToken = () => {
-  //   localStorage.clear();
-  //   setSessionToken("");
-  // }
-
-  // const protectedViews = () => {
-  //   return ( sessionToken === localStorage.getItem("token") ? <WorkoutIndex token={sessionToken}/>
-  //   : <Auth updateToken={updateToken}/>)
-  // }
-
-  // return (
-  //   <div>
-  //     <Sitebar clickLogout={clearToken} />
-  //     {protectedViews()}
-  //   </div>
-  // );
 }
 
 export default App;
