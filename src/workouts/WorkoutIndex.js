@@ -10,7 +10,7 @@ const WorkoutIndex = (props) => {
   const [workoutToUpdate, setWorkoutToUpdate] = useState({});
 
   const fetchWorkouts = () => {
-    fetch(`http://localhost:3000/log`, {
+    fetch(`http://localhost:3001/log`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -20,13 +20,16 @@ const WorkoutIndex = (props) => {
       .then((res) => res.json())
       .then((logData) => {
         setWorkouts(logData.data);
-        console.log(logData.data);
       });
   };
 
+  useEffect(() => {
+    fetchWorkouts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const editUpdateWorkout = (workout) => {
     setWorkoutToUpdate(workout);
-    console.log(workout);
   };
 
   const updateOn = () => {
@@ -37,9 +40,7 @@ const WorkoutIndex = (props) => {
     setUpdateActive(false);
   };
 
-  useEffect(() => {
-    fetchWorkouts();
-  }, []);
+
   return (
     <Container>
       <Row>

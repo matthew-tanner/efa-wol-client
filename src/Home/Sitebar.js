@@ -1,5 +1,5 @@
-import React , {useState} from "react";
-import { Navbar, NavbarBrand, Collapse, NavbarToggler, NavItem, Nav, Button } from "reactstrap";
+import React, { useState } from "react";
+import { Navbar, NavbarBrand, NavbarToggler, Button, NavItem, Nav, Collapse } from "reactstrap";
 
 const Sitebar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,8 +7,9 @@ const Sitebar = (props) => {
   const toggle = () => {
     let newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
-  }
-  return(
+  };
+
+  return (
     <Navbar color="faded" light expand="md">
       <NavbarBrand href="/">Workout Log</NavbarBrand>
       <NavbarToggler onClick={toggle} />
@@ -20,7 +21,7 @@ const Sitebar = (props) => {
         </Nav>
       </Collapse>
     </Navbar>
-  )
-}
+  );
+};
 
 export default Sitebar;

@@ -8,7 +8,7 @@ const WorkoutEdit = (props) => {
 
   const workoutUpdate = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/log/${props.workoutToUpdate.id}`, {
+    fetch(`http://localhost:3001/log/${props.workoutToUpdate.id}`, {
       method: "PUT",
       body: JSON.stringify({log: {description: editDescription, definition: editDefinition, result: editResult}}),
       headers: new Headers({
