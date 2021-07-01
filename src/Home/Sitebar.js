@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Navbar, NavbarBrand, NavbarToggler, Button, NavItem, Nav, Collapse } from "reactstrap";
+import {
+  Container,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  Button,
+  NavItem,
+  Nav,
+  Collapse,
+  Row,
+  Col,
+} from "reactstrap";
 
 const Sitebar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,18 +20,32 @@ const Sitebar = (props) => {
     setIsOpen(newIsOpen);
   };
 
+  const logoutButton = () => {
+    return props.token === localStorage.getItem("token") ? (
+      <span>
+        <Button color="warning" onClick={props.clickLogout}>Logout</Button>
+      </span>
+    ) : (
+      <span></span>
+    );
+  };
+
   return (
-    <Navbar color="faded" light expand="md">
-      <NavbarBrand href="/">Workout Log</NavbarBrand>
-      <NavbarToggler onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            <Button onClick={props.clickLogout}>Logout</Button>
-          </NavItem>
-        </Nav>
-      </Collapse>
-    </Navbar>
+    <Container>
+      <Row>
+        <Col sm={{size: "auto", offset: 11}}>
+          <Navbar color="faded" light expand="md">
+            <NavbarBrand>Workout Log</NavbarBrand>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+              <Nav className="ml-auto" navbar>
+                <NavItem>{logoutButton()}</NavItem>
+              </Nav>
+            </Collapse>
+          </Navbar>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

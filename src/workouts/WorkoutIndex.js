@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import WorkoutCreate from "./WorkoutCreate";
 import WorkoutTable from "./WorkoutTable";
 import WorkoutEdit from "./WorkoutEdit";
 
 const WorkoutIndex = (props) => {
   const [workouts, setWorkouts] = useState([]);
+  const [createActive, setCreateActive] = useState(false);
   const [updateActive, setUpdateActive] = useState(false);
   const [workoutToUpdate, setWorkoutToUpdate] = useState({});
 
@@ -25,11 +26,19 @@ const WorkoutIndex = (props) => {
 
   useEffect(() => {
     fetchWorkouts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const editUpdateWorkout = (workout) => {
     setWorkoutToUpdate(workout);
+  };
+
+  const createOn = () => {
+    setCreateActive(true);
+  };
+
+  const createOff = () => {
+    setCreateActive(false);
   };
 
   const updateOn = () => {
@@ -40,18 +49,27 @@ const WorkoutIndex = (props) => {
     setUpdateActive(false);
   };
 
-
   return (
     <Container>
-      <Row>
-        <Col md="3">
-          <WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token} />
+      <Row className="justify-content-center">
+        <Col md="9">
+          <Button className="bg-success" onClick={() => {
+                createOn();
+              }}>Create Workout</Button>
+          {createActive ? (
+            <WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token} createOn={createOn} createOff={createOff} />
+          ) : (
+            <div></div>
+          )}
         </Col>
+      </Row>
+      <Row className="justify-content-center">
         <Col md="9">
           <WorkoutTable
             workouts={workouts}
             editUpdateWorkout={editUpdateWorkout}
             updateOn={updateOn}
+            createOff={createOff}
             fetchWorkouts={fetchWorkouts}
             token={props.token}
           />
@@ -60,6 +78,7 @@ const WorkoutIndex = (props) => {
           <WorkoutEdit
             workoutToUpdate={workoutToUpdate}
             updateOff={updateOff}
+            createOff={createOff}
             token={props.token}
             fetchWorkouts={fetchWorkouts}
           />
@@ -72,3 +91,7 @@ const WorkoutIndex = (props) => {
 };
 
 export default WorkoutIndex;
+
+// <Col md="3">
+// <WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token} />
+// </Col>

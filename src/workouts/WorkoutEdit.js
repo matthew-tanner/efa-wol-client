@@ -24,6 +24,10 @@ const WorkoutEdit = (props) => {
       });
   };
 
+  const cancelUpdate = () => {
+    props.updateOff();
+  }
+
   return (
     <Modal isOpen={true}>
       <ModalHeader>Log a Workout</ModalHeader>
@@ -53,7 +57,8 @@ const WorkoutEdit = (props) => {
               onChange={(e) => setEditDefinition(e.target.value)}
               />
           </FormGroup>
-          <Button type="submit">Update the workout</Button>
+          <Button color="primary" type="submit">Update the workout</Button>{" "}
+          <Button color="secondary" onClick={() => cancelUpdate()}>Cancel</Button>
         </Form>
       </ModalBody>
     </Modal>
