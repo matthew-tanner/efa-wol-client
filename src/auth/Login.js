@@ -52,7 +52,7 @@ const Login = (props) => {
           {passError}
         </FormGroup>
         <FormGroup>
-          <Button type="submit">Login</Button>
+          <Button color="primary" type="submit">Login</Button>
         </FormGroup>
       </Form>
     </div>
